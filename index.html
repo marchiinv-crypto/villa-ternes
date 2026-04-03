@@ -61,7 +61,8 @@ section{padding:80px 40px;max-width:1000px;margin:0 auto;}
 .plan-card{background:rgba(245,240,232,0.04);border:0.5px solid rgba(201,185,122,0.2);padding:24px;}
 .plan-header{font-size:9px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:16px;}
 .plan-img-wrap{width:100%;height:220px;overflow:hidden;background:rgba(245,240,232,0.06);display:flex;align-items:center;justify-content:center;}
-.plan-img-wrap img{max-width:100%;max-height:100%;object-fit:contain;filter:invert(1) brightness(0.8);}
+.plan-img-wrap img{max-width:100%;max-height:100%;object-fit:contain;cursor:pointer;transition:transform 0.3s;}
+.plan-img-wrap img:hover{transform:scale(1.02);}
 .plan-pieces{margin-top:14px;display:flex;flex-direction:column;gap:6px;}
 .plan-piece{display:flex;align-items:center;gap:8px;font-size:11px;color:rgba(245,240,232,0.6);}
 .plan-piece::before{content:'';width:6px;height:0.5px;background:var(--gold);opacity:0.6;}
@@ -117,7 +118,7 @@ section{padding:80px 40px;max-width:1000px;margin:0 auto;}
 </div>
 
 <div class="hero">
-  <div class="hero-bg"><img src="7.jpg" alt="Villa des Ternes"></div>
+  <div class="hero-bg"><img src="8.jpg" alt="Villa des Ternes"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-tag">17ᵉ arrondissement · Voie privée · Paris</div>
@@ -160,7 +161,7 @@ section{padding:80px 40px;max-width:1000px;margin:0 auto;}
   <div class="plans-grid">
     <div class="plan-card">
       <div class="plan-header">Niveau bas · RDC</div>
-      <div class="plan-img-wrap"><img src="PLAN-RDC.jpg" alt="Plan RDC"></div>
+      <div class="plan-img-wrap"><img src="PLAN-RDC.jpg" alt="Plan RDC" onclick="openLb2('PLAN-RDC.jpg')"></div>
       <div class="plan-pieces">
         <div class="plan-piece">Chambre principale</div>
         <div class="plan-piece">Salle de bain (baignoire + douche)</div>
@@ -170,7 +171,7 @@ section{padding:80px 40px;max-width:1000px;margin:0 auto;}
     </div>
     <div class="plan-card">
       <div class="plan-header">Niveau haut · R+1</div>
-      <div class="plan-img-wrap"><img src="PLAN-R+1.jpg" alt="Plan R+1"></div>
+      <div class="plan-img-wrap"><img src="PLAN-R+1.jpg" alt="Plan R+1" onclick="openLb2('PLAN-R+1.jpg')"></div>
       <div class="plan-pieces">
         <div class="plan-piece">Espace de réception sous verrière</div>
         <div class="plan-piece">Salon + cheminée éthanol</div>
@@ -245,6 +246,7 @@ photos.forEach((src,i) => {
   d.onclick = () => openLb(i);
   gal.appendChild(d);
 });
+function openLb2(src){document.getElementById('lb-img').src=src;document.getElementById('lb-counter').textContent='Plan';document.getElementById('lb').style.display='flex';}
 function openLb(i){cur=i;document.getElementById('lb-img').src=photos[cur];document.getElementById('lb-counter').textContent=(cur+1)+' / '+photos.length;document.getElementById('lb').style.display='flex';}
 function closeLb(){document.getElementById('lb').style.display='none';}
 function lbNav(d){cur=(cur+d+photos.length)%photos.length;document.getElementById('lb-img').src=photos[cur];document.getElementById('lb-counter').textContent=(cur+1)+' / '+photos.length;}
