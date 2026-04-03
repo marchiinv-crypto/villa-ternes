@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maison d'architecte · Villa des Ternes · Paris 17ᵉ</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
+  :root{--gold:#C9B97A;--gold-light:#E0D4A0;--dark:#1A1612;--dark2:#2C2420;--cream:#F5F0E8;--muted:#8B7355;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--dark);color:var(--cream);font-family:'Montserrat',sans-serif;overflow-x:hidden;}
+
+  /* HERO */
+  .hero{position:relative;height:100vh;min-height:600px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;}
+  .hero-bg{position:absolute;inset:0;}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 25%;}
+  .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,8,5,0.2) 0%,rgba(10,8,5,0.72) 70%,rgba(10,8,5,0.97) 100%);}
+  .hero-content{position:relative;z-index:2;padding:0 40px 56px;max-width:800px;}
+  .hero-tag{font-size:9px;font-weight:500;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+  .hero-tag::before{content:'';width:28px;height:0.5px;background:var(--gold);}
+  .hero-titre{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,68px);font-weight:300;line-height:1.05;color:var(--cream);margin-bottom:10px;}
+  .hero-titre em{font-style:italic;display:block;}
+  .hero-sous{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,2vw,22px);font-style:italic;color:rgba(201,185,122,0.7);margin-bottom:24px;letter-spacing:1px;}
+  .hero-prix{display:inline-flex;align-items:baseline;gap:6px;background:rgba(201,185,122,0.12);border:0.5px solid rgba(201,185,122,0.4);padding:10px 20px;margin-bottom:24px;}
+  .hero-prix-val{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--gold-light);}
+  .hero-prix-label{font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;}
+  .hero-scroll{display:flex;align-items:center;gap:10px;font-size:9px;letter-spacing:3px;color:rgba(245,240,232,0.4);text-transform:uppercase;cursor:pointer;}
+  .scroll-arr{width:16px;height:16px;border-right:0.5px solid currentColor;border-bottom:0.5px solid currentColor;transform:rotate(45deg);}
+
+  /* SECTIONS */
+  section{padding:80px 40px;max-width:1000px;margin:0 auto;}
+  .stag{font-size:8px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+  .stag::before{content:'';width:20px;height:0.5px;background:var(--gold);}
+  .stitre{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.5vw,44px);font-weight:300;color:var(--cream);line-height:1.2;margin-bottom:28px;}
+  .stitre em{font-style:italic;}
+  .divider{width:40px;height:0.5px;background:var(--gold);margin-bottom:28px;opacity:0.6;}
+  .desc-text{font-family:'Cormorant Garamond',serif;font-size:18px;color:rgba(245,240,232,0.82);line-height:1.8;margin-bottom:22px;}
+
+  /* SPECS */
+  .specs-band{background:var(--dark2);border-top:0.5px solid rgba(201,185,122,0.2);border-bottom:0.5px solid rgba(201,185,122,0.2);padding:40px;}
+  .specs-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);}
+  .spec-item{text-align:center;padding:16px;position:relative;}
+  .spec-item+.spec-item::before{content:'';position:absolute;left:0;top:20%;height:60%;width:0.5px;background:rgba(201,185,122,0.25);}
+  .spec-val{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;color:var(--cream);line-height:1;margin-bottom:6px;}
+  .spec-unit{font-size:14px;}
+  .spec-label{font-size:8px;font-weight:500;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;}
+
+  /* GALERIE MASONRY */
+  .galerie-masonry{columns:2;column-gap:4px;}
+  .gal-item{break-inside:avoid;margin-bottom:4px;overflow:hidden;position:relative;cursor:pointer;background:#2a2520;}
+  .gal-item img{width:100%;height:auto;display:block;transition:transform 0.6s ease;}
+  .gal-item:hover img{transform:scale(1.03);}
+  .gal-item:first-child{columns:1;column-span:all;}
+  .gal-overlay{position:absolute;inset:0;background:rgba(10,8,5,0);transition:background 0.3s;}
+  .gal-item:hover .gal-overlay{background:rgba(10,8,5,0.15);}
+  .gal-label{position:absolute;bottom:10px;left:12px;font-size:8px;letter-spacing:2.5px;color:rgba(245,240,232,0);text-transform:uppercase;transition:color 0.3s;}
+  .gal-item:hover .gal-label{color:rgba(245,240,232,0.6);}
+
+  /* LIGHTBOX */
+  .lightbox{display:none;position:fixed;inset:0;background:rgba(10,8,5,0.97);z-index:1000;align-items:center;justify-content:center;flex-direction:column;}
+  .lightbox.open{display:flex;}
+  .lb-img-wrap{position:relative;display:flex;align-items:center;gap:20px;}
+  .lightbox img{max-width:88vw;max-height:82vh;object-fit:contain;}
+  .lb-close{position:absolute;top:20px;right:28px;font-size:36px;color:rgba(245,240,232,0.4);cursor:pointer;font-family:'Cormorant Garamond',serif;line-height:1;}
+  .lb-close:hover{color:var(--gold);}
+  .lb-nav{width:44px;height:44px;background:rgba(201,185,122,0.1);border:0.5px solid rgba(201,185,122,0.3);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background 0.2s;}
+  .lb-nav:hover{background:rgba(201,185,122,0.2);}
+  .lb-nav svg{width:14px;height:14px;}
+  .lb-counter{margin-top:14px;font-size:9px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;}
+
+  /* PLANS */
+  .plans-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;}
+  .plan-card{background:rgba(245,240,232,0.04);border:0.5px solid rgba(201,185,122,0.2);padding:24px;}
+  .plan-header{font-size:9px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:16px;}
+  .plan-img-wrap{width:100%;height:220px;overflow:hidden;background:rgba(245,240,232,0.06);display:flex;align-items:center;justify-content:center;}
+  .plan-img-wrap img{max-width:100%;max-height:100%;object-fit:contain;filter:invert(1) brightness(0.8);}
+  .plan-pieces{margin-top:14px;display:flex;flex-direction:column;gap:6px;}
+  .plan-piece{display:flex;align-items:center;gap:8px;font-size:11px;color:rgba(245,240,232,0.6);}
+  .plan-piece::before{content:'';width:6px;height:0.5px;background:var(--gold);opacity:0.6;}
+
+  /* POINTS */
+  .points-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .point-card{background:rgba(245,240,232,0.03);border:0.5px solid rgba(201,185,122,0.15);padding:20px 22px;display:flex;gap:14px;align-items:flex-start;transition:background 0.3s,border-color 0.3s;}
+  .point-card:hover{background:rgba(201,185,122,0.06);border-color:rgba(201,185,122,0.35);}
+  .point-icon{width:28px;height:28px;background:rgba(201,185,122,0.1);border:0.5px solid rgba(201,185,122,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .point-titre{font-size:11px;font-weight:500;letter-spacing:0.5px;color:var(--cream);margin-bottom:4px;}
+  .point-desc{font-size:11px;color:rgba(245,240,232,0.5);line-height:1.5;}
+
+  /* LOCA */
+  .loca-map{width:100%;height:200px;background:#1e1b17;border:0.5px solid rgba(201,185,122,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:20px;position:relative;overflow:hidden;}
+  .paris-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,185,122,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,185,122,0.04) 1px,transparent 1px);background-size:32px 32px;}
+  .paris-dot{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:10px;height:10px;background:var(--gold);border-radius:50%;box-shadow:0 0 0 6px rgba(201,185,122,0.2),0 0 0 14px rgba(201,185,122,0.08);}
+  .paris-lbl{position:absolute;top:50%;left:50%;transform:translate(14px,-50%);font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;white-space:nowrap;}
+  .loca-infos{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .loca-item{background:rgba(245,240,232,0.03);border:0.5px solid rgba(201,185,122,0.12);padding:14px 16px;text-align:center;}
+  .loca-val{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--cream);margin-bottom:3px;}
+  .loca-label{font-size:8px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;}
+
+  /* CONTACT */
+  .contact-section{background:var(--dark2);border-top:0.5px solid rgba(201,185,122,0.2);padding:60px 40px;text-align:center;}
+  .contact-inner{max-width:600px;margin:0 auto;}
+  .contact-titre{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;font-style:italic;color:var(--cream);margin-bottom:8px;}
+  .contact-sous{font-size:9px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:36px;}
+  .contact-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+  .btn-c{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;text-decoration:none;cursor:pointer;border:none;font-family:'Montserrat',sans-serif;transition:all 0.3s;}
+  .btn-gold{background:var(--gold);color:var(--dark);}
+  .btn-gold:hover{background:var(--gold-light);}
+  .btn-outline{background:transparent;color:var(--cream);border:0.5px solid rgba(201,185,122,0.5);}
+  .btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+  .contact-mention{margin-top:32px;font-size:9px;color:rgba(245,240,232,0.22);letter-spacing:1px;line-height:1.8;}
+
+  .footer-final{padding:18px 40px;background:var(--dark);border-top:0.5px solid rgba(201,185,122,0.1);display:flex;justify-content:space-between;align-items:center;}
+  .footer-final p{font-size:8px;letter-spacing:1.5px;color:rgba(245,240,232,0.18);text-transform:uppercase;}
+  .footer-gold{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:300;color:var(--gold);letter-spacing:2px;}
+
+  @media(max-width:680px){
+    .hero-content{padding:0 20px 40px;}
+    section{padding:60px 20px;}
+    .specs-grid{grid-template-columns:repeat(2,1fr);}
+    .galerie-masonry{columns:1;}
+    .plans-grid,.points-grid,.loca-infos{grid-template-columns:1fr;}
+    .contact-actions{flex-direction:column;align-items:center;}
+    .footer-final{flex-direction:column;gap:8px;text-align:center;}
+  }
+</style>
+</head>
+<body>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lb">
+  <div class="lb-close" onclick="closeLb()">×</div>
+  <div class="lb-img-wrap">
+    <div class="lb-nav" onclick="lbNav(-1)">
+      <svg viewBox="0 0 14 14" fill="none" stroke="rgba(201,185,122,0.9)" stroke-width="1.5"><path d="M9 2L4 7l5 5"/></svg>
+    </div>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-nav" onclick="lbNav(1)">
+      <svg viewBox="0 0 14 14" fill="none" stroke="rgba(201,185,122,0.9)" stroke-width="1.5"><path d="M5 2l5 5-5 5"/></svg>
+    </div>
+  </div>
+  <div class="lb-counter" id="lb-counter"></div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"><img src="7.jpg" alt="Villa des Ternes"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag">17ᵉ arrondissement · Voie privée · Paris</div>
+    <h1 class="hero-titre">Maison d'architecte<em>Villa des Ternes</em></h1>
+    <p class="hero-sous">Calme absolu · Lumière zénithale · Intimité totale</p>
+    <div class="hero-prix">
+      <span class="hero-prix-val">990 000 €</span>
+      <span class="hero-prix-label">Prix de vente</span>
+    </div>
+    <div class="hero-scroll" onclick="document.getElementById('desc').scrollIntoView({behavior:'smooth'})">
+      <div class="scroll-arr"></div>Découvrir le bien
+    </div>
+  </div>
+</div>
+
+<!-- DESCRIPTION -->
+<section id="desc">
+  <div class="stag">Le bien</div>
+  <h2 class="stitre">Un lieu rare,<br><em>confidentiel et lumineux</em></h2>
+  <div class="divider"></div>
+  <p class="desc-text">À l'abri des regards, au cœur de la très prisée Villa des Ternes — voie privée confidentielle du 17ᵉ — cette maison d'architecte développe un volume rare, entre lumière zénithale et calme absolu.</p>
+  <p class="desc-text">Pensée comme un véritable lieu de vie, elle offre l'expérience d'une maison indépendante en plein Paris. Sur deux niveaux organisés avec une grande fluidité, le rez-de-chaussée accueille la chambre, la salle de bain avec baignoire et douche italienne, un bureau/dressing et un WC indépendant. Le niveau supérieur dévoile un espace de réception sous verrière pleine hauteur (3,40 m), baigné de lumière naturelle, sans aucun vis-à-vis. Le salon avec cheminée éthanol s'ouvre sur une cuisine à îlot central, dans une composition élégante intégrant de nombreux rangements sur-mesure.</p>
+  <p class="desc-text">Bien singulier et confidentiel, idéal en pied-à-terre de caractère ou pour un amateur d'architecture recherchant un lieu hors des standards du marché parisien.</p>
+</section>
+
+<!-- SPECS -->
+<div class="specs-band">
+  <div class="specs-grid">
+    <div class="spec-item"><div class="spec-val">63<span class="spec-unit">m²</span></div><div class="spec-label">Surface loi Carrez</div></div>
+    <div class="spec-item"><div class="spec-val">2</div><div class="spec-label">Niveaux</div></div>
+    <div class="spec-item"><div class="spec-val">3,40<span class="spec-unit">m</span></div><div class="spec-label">Sous verrière</div></div>
+    <div class="spec-item"><div class="spec-val">990<span class="spec-unit">k€</span></div><div class="spec-label">Prix de vente</div></div>
+  </div>
+</div>
+
+<!-- GALERIE -->
+<section>
+  <div class="stag">Galerie photos</div>
+  <h2 class="stitre"><em>Intérieurs</em></h2>
+  <div class="divider"></div>
+  <div class="galerie-masonry" id="galerie"></div>
+</section>
+
+<!-- PLANS -->
+<section>
+  <div class="stag">Architecture</div>
+  <h2 class="stitre">Plans des <em>deux niveaux</em></h2>
+  <div class="divider"></div>
+  <div class="plans-grid">
+    <div class="plan-card">
+      <div class="plan-header">Niveau bas · RDC</div>
+      <div class="plan-img-wrap"><img src="PLAN RDC.jpg" alt="Plan RDC"></div>
+      <div class="plan-pieces">
+        <div class="plan-piece">Chambre principale</div>
+        <div class="plan-piece">Salle de bain (baignoire + douche)</div>
+        <div class="plan-piece">Bureau / dressing</div>
+        <div class="plan-piece">WC indépendant · Buanderie</div>
+      </div>
+    </div>
+    <div class="plan-card">
+      <div class="plan-header">Niveau haut · R+1</div>
+      <div class="plan-img-wrap"><img src="PLAN R+1.jpg" alt="Plan R+1"></div>
+      <div class="plan-pieces">
+        <div class="plan-piece">Espace de réception sous verrière</div>
+        <div class="plan-piece">Salon + cheminée éthanol</div>
+        <div class="plan-piece">Cuisine avec îlot central</div>
+        <div class="plan-piece">Rangements sur-mesure</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POINTS FORTS -->
+<section>
+  <div class="stag">Atouts du bien</div>
+  <h2 class="stitre"><em>Ce qui rend ce lieu</em> unique</h2>
+  <div class="divider"></div>
+  <div class="points-grid">
+    <div class="point-card">
+      <div class="point-icon"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="rgba(201,185,122,0.9)" stroke-width="1"><circle cx="7" cy="7" r="5"/><line x1="7" y1="2" x2="7" y2="4"/><line x1="7" y1="10" x2="7" y2="12"/><line x1="2" y1="7" x2="4" y2="7"/><line x1="10" y1="7" x2="12" y2="7"/></svg></div>
+      <div><div class="point-titre">Lumière zénithale remarquable</div><div class="point-desc">Verrière pleine hauteur (3,40 m) qui inonde l'espace de lumière naturelle</div></div>
+    </div>
+    <div class="point-card">
+      <div class="point-icon"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="rgba(201,185,122,0.9)" stroke-width="1"><rect x="2" y="2" width="10" height="10" rx="1"/><path d="M5 5h4M5 7h4M5 9h2"/></svg></div>
+      <div><div class="point-titre">Calme absolu · Sans vis-à-vis</div><div class="point-desc">Voie privée confidentielle, entièrement à l'écart de l'agitation parisienne</div></div>
+    </div>
+    <div class="point-card">
+      <div class="point-icon"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="rgba(201,185,122,0.9)" stroke-width="1"><path d="M2 11L7 3L12 11"/><line x1="4.5" y1="7.5" x2="9.5" y2="7.5"/></svg></div>
+      <div><div class="point-titre">Rénovation architecturale complète</div><div class="point-desc">Matériaux nobles, finitions haut de gamme, rangements intégrés sur-mesure</div></div>
+    </div>
+    <div class="point-card">
+      <div class="point-icon"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="rgba(201,185,122,0.9)" stroke-width="1"><path d="M3 11V6L7 2L11 6v5"/><rect x="5" y="7" width="4" height="4"/></svg></div>
+      <div><div class="point-titre">Esprit maison en plein Paris</div><div class="point-desc">Idéal en pied-à-terre de caractère, hors des standards du marché parisien</div></div>
+    </div>
+    <div class="point-card">
+      <div class="point-icon"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="rgba(201,185,122,0.9)" stroke-width="1"><circle cx="7" cy="6" r="3"/><path d="M3.5 11.5c0-1.93 1.57-3.5 3.5-3.5s3.5 1.57 3.5 3.5"/></svg></div>
+      <div><div class="point-titre">Localisation d'exception</div><div class="point-desc">Ternes, 17ᵉ — commerces, transports, calme : le meilleur des deux mondes</div></div>
+    </div>
+    <div class="point-card">
+      <div class="point-icon"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="rgba(201,185,122,0.9)" stroke-width="1"><rect x="1" y="6" width="12" height="7" rx="1"/><path d="M4 6V4a3 3 0 016 0v2"/></svg></div>
+      <div><div class="point-titre">Cuisine à îlot · Cheminée éthanol</div><div class="point-desc">Composition élégante au niveau supérieur, pensée pour vivre et recevoir</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCALISATION -->
+<section>
+  <div class="stag">Localisation</div>
+  <h2 class="stitre">Villa des Ternes,<br><em>Paris 17ᵉ</em></h2>
+  <div class="divider"></div>
+  <div class="loca-map">
+    <div class="paris-grid"></div>
+    <div class="paris-dot"></div>
+    <div class="paris-lbl">Villa des Ternes</div>
+  </div>
+  <div class="loca-infos">
+    <div class="loca-item"><div class="loca-val">Argentine</div><div class="loca-label">Métro · 5 min à pied</div></div>
+    <div class="loca-item"><div class="loca-val">Ternes</div><div class="loca-label">Marché · commerces</div></div>
+    <div class="loca-item"><div class="loca-val">Voie privée</div><div class="loca-label">Calme & discrétion</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section">
+  <div class="contact-inner">
+    <div class="stag" style="justify-content:center;margin-bottom:16px;">Contact</div>
+    <h2 class="contact-titre">Prendre rendez-vous</h2>
+    <p class="contact-sous">Vente directe · Architecte propriétaire</p>
+    <div class="contact-actions">
+      <a href="tel:0637437809" class="btn-c btn-gold">
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 2h3l1.5 3.5-2 1.5a9 9 0 003.5 3.5l1.5-2 3.5 1.5v3a1 1 0 01-1 1C6 15-1 8 2 2z"/></svg>
+        06 37 43 78 09
+      </a>
+      <a href="mailto:m.archi.inv@gmail.com" class="btn-c btn-outline">
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="12" height="9" rx="1"/><path d="M1 4l6 5 6-5"/></svg>
+        m.archi.inv@gmail.com
+      </a>
+    </div>
+    <p class="contact-mention">Bien présenté en vente directe par l'architecte propriétaire.<br>Visites sur rendez-vous uniquement.</p>
+  </div>
+</div>
+
+<div class="footer-final">
+  <p>Paris 17ᵉ · Villa des Ternes · Vente directe</p>
+  <div class="footer-gold">990 000 €</div>
+</div>
+
+<script>
+// Liste des photos — ajoute ou retire des noms selon tes fichiers
+const photos = [
+  'photo1.jpg','photo2.jpg','photo3.jpg','photo4.jpg','photo5.jpg',
+  'photo6.jpg','photo7.jpg','photo8.jpg','photo9.jpg','photo10.jpg'
+];
+
+// Labels optionnels pour chaque photo
+const labels = [
+  'Cuisine · Verrière','Séjour · Vue zénithale','Escalier','Chambre principale',
+  'Salle de bain','Dressing','Ambiance nuit','Cuisine · Îlot','Détail','Vue d\'ensemble'
+];
+
+let currentIdx = 0;
+
+// Construction galerie
+const galerie = document.getElementById('galerie');
+photos.forEach((src, i) => {
+  const div = document.createElement('div');
+  div.className = 'gal-item';
+  div.innerHTML = `<img src="${src}" alt="${labels[i]||''}"><div class="gal-overlay"></div><div class="gal-label">${labels[i]||''}</div>`;
+  div.onclick = () => openLb(i);
+  galerie.appendChild(div);
+});
+
+function openLb(idx) {
+  currentIdx = idx;
+  document.getElementById('lb-img').src = photos[currentIdx];
+  document.getElementById('lb-counter').textContent = (currentIdx+1) + ' / ' + photos.length;
+  document.getElementById('lb').style.display = 'flex';
+}
+
+function closeLb() {
+  document.getElementById('lb').style.display = 'none';
+}
+
+function lbNav(dir) {
+  currentIdx = (currentIdx + dir + photos.length) % photos.length;
+  document.getElementById('lb-img').src = photos[currentIdx];
+  document.getElementById('lb-counter').textContent = (currentIdx+1) + ' / ' + photos.length;
+}
+
+document.getElementById('lb').addEventListener('click', function(e) {
+  if(e.target === this) closeLb();
+});
+
+document.addEventListener('keydown', e => {
+  if(!document.getElementById('lb').style.display || document.getElementById('lb').style.display==='none') return;
+  if(e.key==='ArrowRight') lbNav(1);
+  if(e.key==='ArrowLeft') lbNav(-1);
+  if(e.key==='Escape') closeLb();
+});
+</script>
+</body>
+</html>

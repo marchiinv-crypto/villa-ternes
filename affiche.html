@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Affiche — Villa des Ternes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#1a1a1a;display:flex;justify-content:center;align-items:flex-start;padding:40px 20px;font-family:'Montserrat',sans-serif;}
+
+  .affiche{width:595px;min-height:842px;background:#F5F0E8;display:flex;flex-direction:column;overflow:hidden;}
+
+  .photo-hero{width:100%;height:400px;position:relative;flex-shrink:0;overflow:hidden;}
+  .photo-hero img{width:100%;height:100%;object-fit:cover;object-position:center 30%;}
+  .photo-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,8,5,0.1) 0%,rgba(10,8,5,0.65) 100%);}
+  .badge{position:absolute;top:24px;right:24px;background:rgba(245,240,232,0.15);border:0.5px solid rgba(245,240,232,0.55);color:#F5F0E8;font-size:8px;font-weight:500;letter-spacing:3px;text-transform:uppercase;padding:6px 14px;}
+  .hero-text{position:absolute;bottom:28px;left:32px;right:32px;}
+  .hero-voie{font-size:9px;font-weight:500;letter-spacing:4px;color:#C9B97A;text-transform:uppercase;margin-bottom:8px;}
+  .hero-titre{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:#F5F0E8;line-height:1.1;}
+  .hero-titre em{font-style:italic;}
+
+  .corps{flex:1;padding:28px 32px 0;display:flex;flex-direction:column;}
+
+  .ligne-deco{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+  .ligne-deco::before,.ligne-deco::after{content:'';flex:1;height:0.5px;background:#C9B97A;opacity:0.5;}
+  .ligne-deco span{font-size:8px;letter-spacing:3px;color:#C9B97A;font-weight:500;text-transform:uppercase;}
+
+  .accroche{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:#2C2420;line-height:1.65;text-align:center;margin-bottom:22px;}
+
+  .specs{display:flex;border-top:0.5px solid rgba(44,36,32,0.15);border-bottom:0.5px solid rgba(44,36,32,0.15);padding:14px 0;margin-bottom:22px;}
+  .spec-item{flex:1;text-align:center;padding:0 10px;position:relative;}
+  .spec-item+.spec-item::before{content:'';position:absolute;left:0;top:15%;height:70%;width:0.5px;background:rgba(44,36,32,0.2);}
+  .spec-val{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:#2C2420;line-height:1;margin-bottom:4px;}
+  .spec-label{font-size:7.5px;font-weight:500;letter-spacing:2px;color:#8B7355;text-transform:uppercase;}
+
+  .points{display:grid;grid-template-columns:1fr 1fr;gap:7px 20px;margin-bottom:22px;}
+  .point-item{display:flex;align-items:flex-start;gap:8px;}
+  .point-bullet{width:4px;height:4px;background:#C9B97A;border-radius:50%;margin-top:5px;flex-shrink:0;}
+  .point-text{font-size:9.5px;color:#4A3F35;line-height:1.5;}
+
+  .mini-photos{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
+  .mini-photo{height:72px;overflow:hidden;}
+  .mini-photo img{width:100%;height:100%;object-fit:cover;}
+
+  .qr-section{background:#2C2420;margin:0 -32px;padding:18px 32px;display:flex;align-items:center;gap:22px;margin-top:auto;}
+  .qr-box{width:72px;height:72px;background:#F5F0E8;flex-shrink:0;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .qr-box img{width:72px;height:72px;}
+  .qr-text{flex:1;}
+  .qr-invite{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:#F5F0E8;margin-bottom:4px;}
+  .qr-sous{font-size:8px;font-weight:500;letter-spacing:2px;color:#C9B97A;text-transform:uppercase;}
+
+  .footer{background:#2C2420;margin:0 -32px;padding:11px 32px;display:flex;justify-content:space-between;align-items:center;border-top:0.5px solid rgba(201,185,122,0.25);}
+  .footer-contact{font-size:9px;color:rgba(245,240,232,0.65);line-height:1.8;}
+  .footer-logo{font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:300;color:#C9B97A;letter-spacing:2px;text-align:right;}
+  .footer-logo span{display:block;font-size:7.5px;font-family:'Montserrat',sans-serif;letter-spacing:2.5px;color:rgba(201,185,122,0.55);text-transform:uppercase;margin-top:2px;}
+
+  @media print{
+    body{background:white;padding:0;}
+    .affiche{width:210mm;min-height:297mm;}
+  }
+</style>
+</head>
+<body>
+<div class="affiche">
+
+  <div class="photo-hero">
+    <img src="7.jpg" alt="Cuisine sous verrière">
+    <div class="photo-hero-overlay"></div>
+    <div class="badge">Confidentiel</div>
+    <div class="hero-text">
+      <div class="hero-voie">17ᵉ arrondissement · Villa des Ternes · Voie privée</div>
+      <div class="hero-titre">Maison d'architecte<br><em>sous verrière</em></div>
+    </div>
+  </div>
+
+  <div class="corps">
+    <div class="ligne-deco"><span>Paris · Bien d'exception</span></div>
+
+    <p class="accroche">À l'abri des regards, au cœur d'une voie privée confidentielle —<br>lumière zénithale, calme absolu, intimité totale.</p>
+
+    <div class="specs">
+      <div class="spec-item"><div class="spec-val">63</div><div class="spec-label">m² loi Carrez</div></div>
+      <div class="spec-item"><div class="spec-val">2</div><div class="spec-label">niveaux</div></div>
+      <div class="spec-item"><div class="spec-val">3,40</div><div class="spec-label">m sous verrière</div></div>
+      <div class="spec-item"><div class="spec-val">1+</div><div class="spec-label">chambre · bureau</div></div>
+    </div>
+
+    <div class="points">
+      <div class="point-item"><div class="point-bullet"></div><div class="point-text">Lumière zénithale & volumes remarquables</div></div>
+      <div class="point-item"><div class="point-bullet"></div><div class="point-text">Aucun vis-à-vis · intimité totale</div></div>
+      <div class="point-item"><div class="point-bullet"></div><div class="point-text">Rénovation architecturale complète</div></div>
+      <div class="point-item"><div class="point-bullet"></div><div class="point-text">Matériaux nobles · finitions haut de gamme</div></div>
+      <div class="point-item"><div class="point-bullet"></div><div class="point-text">Rangements intégrés sur-mesure</div></div>
+      <div class="point-item"><div class="point-bullet"></div><div class="point-text">Esprit maison en plein cœur de Paris</div></div>
+    </div>
+
+    <div class="mini-photos">
+      <div class="mini-photo"><img src="8.jpg" alt="Séjour" style="object-position:center 20%"></div>
+      <div class="mini-photo"><img src="12.jpg" alt="Escalier"></div>
+      <div class="mini-photo"><img src="15.jpg" alt="Chambre" style="object-position:20% center"></div>
+    </div>
+
+    <div class="qr-section">
+      <div class="qr-box">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=72x72&data=https://villa-ternes-photo-claude.tiiny.site&color=2C2420&bgcolor=F5F0E8&margin=3" alt="QR code">
+      </div>
+      <div class="qr-text">
+        <div class="qr-invite">Photos, plans & informations complètes</div>
+        <div class="qr-sous">Scanner pour découvrir le bien en détail</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-contact">06 37 43 78 09<br>m.archi.inv@gmail.com</div>
+      <div class="footer-logo">Villa des Ternes<span>Vente directe · Architecte propriétaire</span></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
